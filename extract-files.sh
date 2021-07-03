@@ -6,7 +6,19 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+function blob_fixup() {
+    case "${1}" in
+        vendor/lib64/hw/camera.qcom.so)
+            "${PATCHELF}" --remove-needed "libMegviiFacepp-0.5.2.so" "${2}"
+            "${PATCHELF}" --remove-needed "libmegface.so" "${2}"
+            "${PATCHELF}" --add-needed "libshim_megvii.so" "${2}"
+            ;;
+    esac
+}
 set -e
+
+export DEVICE=surya
+export VENDOR=xiaomi
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -68,7 +80,7 @@ function blob_fixup() {
 
 if [ -z "${ONLY_TARGET}" ]; then
     # Initialize the helper for common device
-    setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
+    setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
 
     extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 fi
