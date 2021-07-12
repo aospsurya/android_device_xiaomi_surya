@@ -171,3 +171,9 @@ service vendor.remosaic_daemon /vendor/bin/remosaic_daemon
     user camera
     group camera
     writepid /dev/cpuset/system-background/tasks
+	
+
+# Restrict permissions to socket file
+# to hide Magisk & co.
+    chmod 440 /proc/net/unix	
+	
