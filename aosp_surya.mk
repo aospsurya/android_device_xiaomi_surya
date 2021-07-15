@@ -15,8 +15,6 @@ $(call inherit-product, device/xiaomi/surya/device.mk)
 $(call inherit-product, vendor/aosp/common.mk)
 
 EXTENDED_BUILD_TYPE := OFFICIAL
-WITH_GAPPS := true
-TARGET_GAPPS_ARCH := arm64
 IS_PHONE := true
 
 PRODUCT_NAME := aosp_surya
