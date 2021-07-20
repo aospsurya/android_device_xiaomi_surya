@@ -12,12 +12,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/xiaomi/surya/device.mk)
 
 # Inherit some common aosp stuff.
-$(call inherit-product, vendor/aosp/common.mk)
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
-EXTENDED_BUILD_TYPE := OFFICIAL
-WITH_GAPPS := true
-TARGET_GAPPS_ARCH := arm64
+# Gapps
 IS_PHONE := true
+TARGET_INCLUDE_GAPPS := true
+TARGET_GAPPS_ARCH := arm64
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+TARGET_INCLUDE_STOCK_ARCORE := true
+TARGET_INCLUDE_LIVE_WALLPAPERS := true
 
 PRODUCT_NAME := aosp_surya
 PRODUCT_DEVICE := surya
